@@ -1,6 +1,7 @@
 Fixed version of MaterialRangeBar fork from https://github.com/oli107/material-range-bar.
 
 Main fixes:
+
 1. Out of range issue (merged pull requests).
 2. Bug with float point values - https://github.com/oli107/material-range-bar/issues/63
 3. Changed build.gradle to simplify using in project as library
