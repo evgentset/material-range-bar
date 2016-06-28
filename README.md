@@ -7,6 +7,7 @@ Main fixes:
 3. Changed build.gradle to simplify using in project as library
 
 To use this in your project:
+
 1. Clone/copy sources to your project.
 2. Add ':material-range-bar' to settings.gradle of your main project.
 3. Add  compile project(':material-range-bar') to build.gradle of your module (by default it's 'app' module)
