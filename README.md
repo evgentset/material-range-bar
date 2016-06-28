@@ -1,3 +1,16 @@
+Fixed version of MaterialRangeBar fork from https://github.com/oli107/material-range-bar.
+Main fixes:
+1. Out of range issue (merged pull requests).
+2. Bug with float point values - https://github.com/oli107/material-range-bar/issues/63
+3. Changed build.gradle to simplify using in project as library
+To use this in your project:
+1. Clone/copy sources to your project.
+2. Add ':material-range-bar' to settings.gradle of your main project.
+3. Add  compile project(':material-range-bar') to build.gradle of your module (by default it's 'app' module)
+Should work :)
+
+
+
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialRangeBar-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1272)
 
 MaterialRangeBar
