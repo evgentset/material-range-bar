@@ -138,9 +138,9 @@ public class RangeBar extends View {
     private boolean mFirstSetTickCount = true;
 
 
-    private final DisplayMetrics mDisplayMetrices = getContext().getResources().getDisplayMetrics();
-    private int mDefaultWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250, mDisplayMetrices);
-    private int mDefaultHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, mDisplayMetrices);
+    private final DisplayMetrics mDisplayMetrics = getContext().getResources().getDisplayMetrics();
+    private int mDefaultWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 250, mDisplayMetrics);
+    private int mDefaultHeight = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, mDisplayMetrics);
 
     private int mTickCount = (int) ((mTickEnd - mTickStart) / mTickInterval) + 1;
 
@@ -911,10 +911,49 @@ public class RangeBar extends View {
     }
 
     /**
+     * Sets the location of pins according by the supplied values.
+     *
+     * @param leftPinValue  Float specifying the index of the left pin
+     * @param rightPinValue Float specifying the index of the right pin
+     */
+    public void setRangePinsByValue2(float leftPinValue, float rightPinValue) {
+        if (valueOutOfRange(leftPinValue, rightPinValue)) {
+            Log.e(TAG,
+                    "Pin value left " + leftPinValue + ", or right " + rightPinValue
+                            + " is out of bounds. Check that it is greater than the minimum ("
+                            + mTickStart + ") and less than the maximum value ("
+                            + mTickEnd + ")");
+            throw new IllegalArgumentException(
+                    "Pin value left " + leftPinValue + ", or right " + rightPinValue
+                            + " is out of bounds. Check that it is greater than the minimum ("
+                            + mTickStart + ") and less than the maximum value ("
+                            + mTickEnd + ")");
+        } else {
+            if (mFirstSetTickCount) {
+                mFirstSetTickCount = false;
+            }
+
+            mLeftIndex = Math.round((leftPinValue - mTickStart) / mTickInterval);
+            mRightIndex = Math.round((rightPinValue - mTickStart) / mTickInterval);
+            createPins();
+
+            if (mListener != null) {
+                mListener.onRangeChangeListener(this, mLeftIndex, mRightIndex,
+                        getPinValue(mLeftIndex), getPinValue(mRightIndex));
+            }
+        }
+        invalidate();
+        requestLayout();
+    }
+
+    /**
+     * Deprecated. Has bug. Use setSeekPinByValue2 instead
+     *
      * Sets the location of pin according by the supplied value.
      *
      * @param pinValue Float specifying the value of the pin
      */
+    @Deprecated
     public void setSeekPinByValue(float pinValue) {
         if (pinValue > mTickEnd || pinValue < mTickStart) {
             Log.e(TAG,
