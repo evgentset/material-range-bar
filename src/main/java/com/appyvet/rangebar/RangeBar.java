@@ -875,11 +875,14 @@ public class RangeBar extends View {
     }
 
     /**
+     * Deprecated. Has bug. Use setSeekPinByValue2 instead
+     *
      * Sets the location of pins according by the supplied values.
      *
      * @param leftPinValue  Float specifying the index of the left pin
      * @param rightPinValue Float specifying the index of the right pin
      */
+    @Deprecated
     public void setRangePinsByValue(float leftPinValue, float rightPinValue) {
         if (valueOutOfRange(leftPinValue, rightPinValue)) {
             Log.e(TAG,
@@ -947,13 +950,10 @@ public class RangeBar extends View {
     }
 
     /**
-     * Deprecated. Has bug. Use setSeekPinByValue2 instead
-     *
      * Sets the location of pin according by the supplied value.
      *
      * @param pinValue Float specifying the value of the pin
      */
-    @Deprecated
     public void setSeekPinByValue(float pinValue) {
         if (pinValue > mTickEnd || pinValue < mTickStart) {
             Log.e(TAG,
